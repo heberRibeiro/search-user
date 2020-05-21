@@ -5,13 +5,14 @@
 .estatistic-col,
 .user-col {
   margin-left: 10px;
-  width: 300px;
-  border-style: solid;
-  border-width: 1px;
+  border: 1px solid lightgray;
   border-radius: 2px;
-  border-color: lightgray;
+  width: 40rem;
+  display: inline-block;
 }
 
 .colunas {
   display: flex;
+  flex-direction: row;
+  justify-content: center;
 }
