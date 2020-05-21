@@ -1,11 +1,18 @@
 let input = document.querySelector('#name');
 let button = document.querySelector('.btn');
-const data = [];
+let data = [];
+
+async function requisicao() {
+  const response = await fetch(
+    'https://randomuser.me/api/?seed=javascript&results=100&nat=BR&noinfo'
+  );
+  data = await response.json();
+}
 
 window.addEventListener('load', () => {
   focusInput();
   disableButton();
-  buttonMonitoring();
+  inputMonitoring();
 });
 
 function focusInput() {
@@ -20,8 +27,9 @@ function enableButton() {
   button.disabled = false;
 }
 
-function buttonMonitoring() {
-  input.addEventListener('keyup', () => {
-    enableButton();
+function inputMonitoring() {
+  input.addEventListener('keyup', (event) => {
+    let buttonContent = event.target.value;
+    buttonContent === '' ? disableButton() : enableButton();
   });
 }
