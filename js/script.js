@@ -4,6 +4,7 @@ let button = document.querySelector('.btn');
 window.addEventListener('load', () => {
   focusInput();
   disableButton();
+  enableButton();
 });
 
 function focusInput() {
@@ -12,4 +13,10 @@ function focusInput() {
 
 function disableButton() {
   button.disabled = true;
+}
+
+function enableButton() {
+  input.addEventListener('keyup', (event) => {
+    button.disabled = false;
+  });
 }
