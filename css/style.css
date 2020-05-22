@@ -28,10 +28,17 @@ span {
 }
 
 /*All <div> elements inside .user-col elements*/
-.user-col div {
+.user-col div,
+.estatistic-col div {
   display: flex;
   flex-wrap: wrap;
   align-content: center;
   margin: 10px;
   text-align: left;
+}
+
+p {
+  font-size: 25px;
+  margin: 15px;
+  font-weight: bold;
 }

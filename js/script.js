@@ -5,7 +5,7 @@ let divEstatistic = document.querySelector('.estatistic-col');
 let inputContent = null;
 let data = null;
 let adjustedData = null;
-let filteredData = null;
+let filteredData = '';
 
 async function request() {
   const response = await fetch(
@@ -20,7 +20,7 @@ window.addEventListener('load', () => {
   focusInput();
   disableButton();
   inputMonitoring();
-  applyInitialDiv();
+  applyUsersDiv();
 });
 
 function focusInput() {
@@ -92,10 +92,10 @@ function filterData() {
 }
 
 function applyInitialDiv() {
-  let users = '<div>Nenhum usuário filtrado</div>';
-  let estatistic = '<div>Nada a ser exibido</div>';
+  let users = '<div><p>Nenhum usuário filtrado</p></div>';
+  let estatistic = '<div><p>Nada a ser exibido</p></div>';
   divPeople.innerHTML = users;
-  estatistic.innerHTML = estatistic;
+  divEstatistic.innerHTML = estatistic;
 }
 
 function applyUsersDiv() {
@@ -103,6 +103,11 @@ function applyUsersDiv() {
     applyInitialDiv();
     return;
   }
+  divPeople.innerHTML = '';
+  let searchSize = filteredData.length;
+  let divSearchSize = `<div><p>${searchSize} usuário(s) encontrado(s)</p></div>`;
+  divPeople.innerHTML = divSearchSize;
+
   filteredData.forEach((person) => {
     let div = document.createElement('DIV');
     let img = document.createElement('IMG');
