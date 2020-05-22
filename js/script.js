@@ -49,6 +49,7 @@ function pushEnter() {
     let inputKey = event.key;
     if (inputKey === 'Enter') {
       filterData();
+      applyUsersDiv();
     }
   });
 }
@@ -56,6 +57,7 @@ function pushEnter() {
 function pushButton() {
   button.addEventListener('click', () => {
     filterData();
+    applyUsersDiv();
   });
 }
 
@@ -94,4 +96,26 @@ function applyInitialDiv() {
   let estatistic = '<div>Nada a ser exibido</div>';
   divPeople.innerHTML = users;
   estatistic.innerHTML = estatistic;
+}
+
+function applyUsersDiv() {
+  if (filteredData == '') {
+    applyInitialDiv();
+    return;
+  }
+  filteredData.forEach((person) => {
+    let div = document.createElement('DIV');
+    let img = document.createElement('IMG');
+    let span = document.createElement('SPAN');
+    let text = document.createTextNode(
+      `${person.name.first} ${person.name.last}, ${person.dob.age} anos`
+    );
+
+    img.src = `${person.picture.thumbnail}`;
+    span.appendChild(text);
+    div.appendChild(img);
+    div.appendChild(span);
+
+    divPeople.appendChild(div);
+  });
 }
