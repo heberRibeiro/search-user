@@ -9,7 +9,7 @@
   width: 40rem;
 }
 
-.estatistic-col {
+.statistic-col {
   border: 1px solid lightgray;
   border-radius: 2px;
 }
@@ -36,10 +36,13 @@ span {
 }
 
 /*All <div> elements inside .user-col elements*/
-.user-col div,
-.estatistic-col div {
+.user-col div {
   display: flex;
   margin: 10px;
+}
+
+.statistic-col span {
+  display: block;
 }
 
 p {

@@ -1,7 +1,7 @@
 let input = document.querySelector('#name');
 let button = document.querySelector('.btn');
 let divPeople = document.querySelector('.user-col');
-let divEstatistic = document.querySelector('.estatistic-col');
+let divStatistic = document.querySelector('.statistic-col');
 let inputContent = null;
 let data = null;
 let adjustedData = null;
@@ -50,6 +50,7 @@ function pushEnter() {
     if (inputKey === 'Enter') {
       filterData();
       applyUsersDiv();
+      applyStatisticDiv();
     }
   });
 }
@@ -58,6 +59,7 @@ function pushButton() {
   button.addEventListener('click', () => {
     filterData();
     applyUsersDiv();
+    applyStatisticDiv();
   });
 }
 
@@ -88,14 +90,13 @@ function filterData() {
     /** filter is made from the content of the input in the first and last name */
     return firstName.includes(inputContent) || lastName.includes(inputContent);
   });
-  console.log(filteredData);
 }
 
 function applyInitialDiv() {
   let users = '<div><p>Nenhum usuário filtrado</p></div>';
-  let estatistic = '<div><p>Nada a ser exibido</p></div>';
+  let statistic = '<div><p>Nada a ser exibido</p></div>';
   divPeople.innerHTML = users;
-  divEstatistic.innerHTML = estatistic;
+  divStatistic.innerHTML = statistic;
 }
 
 function applyUsersDiv() {
@@ -123,4 +124,54 @@ function applyUsersDiv() {
 
     divPeople.appendChild(div);
   });
+}
+
+function applyStatisticDiv() {
+  if (filteredData == '') {
+    applyInitialDiv();
+    return;
+  }
+
+  let maleNumber = 0;
+  let femaleNumber = 0;
+  let ageSum = 0;
+  let totalUsers = filteredData.length;
+
+  let statistic = '<div><p>Estatísticas</p></div>';
+  divStatistic.innerHTML = statistic;
+
+  filteredData.forEach((person) => {
+    ageSum += person.dob.age;
+    if (person.gender === 'male') {
+      ++maleNumber;
+    } else {
+      ++femaleNumber;
+    }
+  });
+  let ageAverage = (ageSum / totalUsers).toFixed(2);
+
+  let div = document.createElement('DIV');
+  let spanMale = document.createElement('SPAN');
+  let spanFemale = document.createElement('SPAN');
+  let spanAge = document.createElement('SPAN');
+  let spanAverage = document.createElement('SPAN');
+
+  let maleTextNumber = document.createTextNode(`Sexo masculino: ${maleNumber}`);
+  let femaleTextNumber = document.createTextNode(
+    `Sexo feminino: ${femaleNumber}`
+  );
+  let ageTextSum = document.createTextNode(`Soma das idades: ${ageSum}`);
+  let ageTextAverage = document.createTextNode(
+    `Média das idades: ${ageAverage}`
+  );
+
+  spanMale.appendChild(maleTextNumber);
+  spanFemale.appendChild(femaleTextNumber);
+  spanAge.appendChild(ageTextSum);
+  spanAverage.appendChild(ageTextAverage);
+  div.appendChild(spanMale);
+  div.appendChild(spanFemale);
+  div.appendChild(spanAge);
+  div.appendChild(spanAverage);
+  divStatistic.appendChild(div);
 }
