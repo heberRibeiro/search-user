@@ -38,6 +38,16 @@ function inputMonitoring() {
     inputContent === '' ? disableButton() : enableButton();
   });
   pushButton();
+  pushEnter();
+}
+
+function pushEnter() {
+  input.addEventListener('keypress', (event) => {
+    let inputKey = event.key;
+    if (inputKey === 'Enter') {
+      filterData();
+    }
+  });
 }
 
 function pushButton() {
