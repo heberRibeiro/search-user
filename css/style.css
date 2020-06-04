@@ -11,7 +11,7 @@
   display: inline-block;
 }
 
-.colunas {
+.columns {
   display: flex;
   flex-direction: row;
   justify-content: center;
