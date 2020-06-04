@@ -1,7 +1,9 @@
 let input = document.querySelector('#name');
 let button = document.querySelector('.btn');
+let inputContent = null;
 let data = null;
 let adjustedData = null;
+let filteredData = null;
 
 async function request() {
   const response = await fetch(
@@ -32,30 +34,44 @@ function enableButton() {
 
 function inputMonitoring() {
   input.addEventListener('keyup', (event) => {
-    let buttonContent = event.target.value;
-    buttonContent === '' ? disableButton() : enableButton();
-
-    pushButton();
+    inputContent = event.target.value;
+    inputContent === '' ? disableButton() : enableButton();
   });
+  pushButton();
 }
 
 function pushButton() {
   button.addEventListener('click', () => {
     filterData();
-    console.log(adjustedData);
   });
 }
 
 function adjustData() {
   adjustedData = data.results.map((person) => {
     const { name, picture, dob, gender } = person;
+    const { first, last } = name;
+    const { thumbnail } = picture;
+    const { age } = dob;
     return {
-      name,
-      picture,
-      dob,
+      name: { first, last },
+      picture: { thumbnail },
+      dob: { age },
       gender,
     };
   });
 }
 
-function filterData() {}
+function filterData() {
+  filteredData = adjustedData.filter((person) => {
+    let firstName = person.name.first;
+    let lastName = person.name.last;
+    /** the filter are not case-sensitive */
+    inputContent = inputContent.toLocaleLowerCase();
+    firstName = firstName.toLocaleLowerCase();
+    lastName = lastName.toLocaleLowerCase();
+
+    /** filter is made from the content of the input in the first and last name */
+    return firstName.includes(inputContent) || lastName.includes(inputContent);
+  });
+  console.log(filteredData);
+}
