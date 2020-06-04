@@ -2,13 +2,21 @@
   margin-top: 24px;
 }
 
-.estatistic-col,
 .user-col {
   margin-left: 10px;
   border: 1px solid lightgray;
   border-radius: 2px;
   width: 40rem;
-  display: inline-block;
+}
+
+.estatistic-col {
+  border: 1px solid lightgray;
+  border-radius: 2px;
+}
+
+.right-column {
+  margin-left: 10px;
+  width: 40rem;
 }
 
 .columns {
@@ -31,10 +39,7 @@ span {
 .user-col div,
 .estatistic-col div {
   display: flex;
-  flex-wrap: wrap;
-  align-content: center;
   margin: 10px;
-  text-align: left;
 }
 
 p {
