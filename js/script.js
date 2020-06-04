@@ -1,5 +1,7 @@
 let input = document.querySelector('#name');
 let button = document.querySelector('.btn');
+let divPeople = document.querySelector('.user-col');
+let divEstatistic = document.querySelector('.estatistic-col');
 let inputContent = null;
 let data = null;
 let adjustedData = null;
@@ -18,6 +20,7 @@ window.addEventListener('load', () => {
   focusInput();
   disableButton();
   inputMonitoring();
+  applyInitialDiv();
 });
 
 function focusInput() {
@@ -84,4 +87,11 @@ function filterData() {
     return firstName.includes(inputContent) || lastName.includes(inputContent);
   });
   console.log(filteredData);
+}
+
+function applyInitialDiv() {
+  let users = '<div>Nenhum usuário filtrado</div>';
+  let estatistic = '<div>Nada a ser exibido</div>';
+  divPeople.innerHTML = users;
+  estatistic.innerHTML = estatistic;
 }
