@@ -1,3 +1,17 @@
 .botao {
   margin-top: 24px;
 }
+
+.estatistic-col,
+.user-col {
+  margin-left: 10px;
+  width: 300px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 2px;
+  border-color: lightgray;
+}
+
+.colunas {
+  display: flex;
+}
